@@ -26,42 +26,106 @@ public class Algebra {
 	// Returns x1 + x2
 	public static int plus(int x1, int x2) {
 		// Replace the following statement with your code
-		return 0;
+        int iterations = 0;
+        int value =  x1;
+        while (iterations < x2){
+            value ++;
+            iterations ++;
+        }
+
+		return value;
 	}
 
 	// Returns x1 - x2
 	public static int minus(int x1, int x2) {
 		// Replace the following statement with your code
-		return 0;
+        int iterations = 0;
+        int value = x1;
+        while (iterations < Math.abs(x2)){
+            if (x2 > 0) {
+                value--;
+            } else {
+                value++;
+            }
+            iterations++;
+        }
+		return value;
 	}
 
 	// Returns x1 * x2
 	public static int times(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+        if (x2 == 0) return 0;
+        int iterations = 0;
+        int value = 0;
+        boolean negative = (x1 < 0) ^ (x2 < 0);
+        int absX1 = Math.abs(x1);
+        int absX2 = Math.abs(x2);
+        
+        while (iterations < absX2){
+            value = plus(value, absX1);
+            iterations++;
+        }
+        return negative ? minus(0, value) : value;
 	}
 
 	// Returns x^n (for n >= 0)
 	public static int pow(int x, int n) {
-		// Replace the following statement with your code
-		return 0;
+        if (n == 0){
+            return 1;
+        }
+        int iterations = 0;
+        int value = 1;
+        while (iterations < n){
+            value = times(value, x);
+            iterations++;
+        }
+        return value;
 	}
 
 	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
 		// Replace the following statement with your code
-		return 0;
+        if (x2 == 0) return 0; // Handle division by zero
+        int iterations = 0;
+        boolean negative = (x1 < 0) ^ (x2 < 0);
+        int absX1 = Math.abs(x1);
+        int absX2 = Math.abs(x2);
+        int value = 0;
+        
+        while (plus(value, absX2) <= absX1){
+            value = plus(value, absX2);
+            iterations++;
+        }
+		return negative ? minus(0, iterations) : iterations;
 	}
 
 	// Returns x1 % x2
 	public static int mod(int x1, int x2) {
 		// Replace the following statement with your code
-		return 0;
+        if (x2 == 0) return 0; // Handle modulo by zero
+        int divResult = div(x1, x2);
+        int product = times(divResult, x2);
+        return minus(x1, product);
 	}	
 
 	// Returns the integer part of sqrt(x) 
 	public static int sqrt(int x) {
-		// Replace the following statement with your code
-		return 0;
+        if (x == 0) return 0;
+        if (x == 1) return 1;
+        
+        int g = div(x, 2);
+        int prevG = 0;
+        
+        while (g != prevG) {
+            prevG = g;
+            g = div(plus(g, div(x, g)), 2);
+        }
+        
+        // Ensure we return the floor of the square root
+        while (times(g, g) > x) {
+            g = minus(g, 1);
+        }
+        
+        return g;
 	}	  	  
 }
