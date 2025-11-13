@@ -47,6 +47,7 @@ public class LoanCalc {
         iterationCounter = 0;
         double payment = loan / n;
         double increment = 1.0; 
+        
         while (true) {
             double balance = endBalance(loan, rate, n, payment);
             iterationCounter++;
@@ -58,9 +59,12 @@ public class LoanCalc {
             if (balance > 0) {
                 payment += increment;
             } else {
+                // We overshot, step back and use smaller increments
                 payment -= increment;
                 increment /= 10.0;
-                payment += increment;
+                if (increment < epsilon) {
+                    increment = epsilon;
+                }
             }
         }
     }
@@ -74,7 +78,7 @@ public class LoanCalc {
     public static double bisectionSolver(double loan, double rate, int n, double epsilon) {
         iterationCounter = 0;
         double low = 0;
-        double high = loan/n;
+        double high = loan; 
 
         while ((high - low) > epsilon) {
             iterationCounter++;
