@@ -13,10 +13,8 @@ public class Anagram {
 		// Tests the randomAnagram function.
 		System.out.println("silent and " + randomAnagram("silent") + " are anagrams.");
 		
-		// Performs a stress test of randomAnagram 
 		String str = "1234567";
 		Boolean pass = true;
-		//// 10 can be changed to much larger values, like 1000
 		for (int i = 0; i < 10; i++) {
 			String randomAnagram = randomAnagram(str);
 			System.out.println(randomAnagram);
@@ -71,7 +69,6 @@ public class Anagram {
 			} else if (c == ' ') {
 				result += c;
 			}
-			// All other characters are ignored
 		}
 		return result;
 	}  
@@ -84,7 +81,6 @@ public class Anagram {
 		while (remaining.length() > 0) {
 			int randomIndex = (int) (Math.random() * remaining.length());
 			result += remaining.charAt(randomIndex);
-			// Remove the character at randomIndex from remaining string
 			remaining = remaining.substring(0, randomIndex) + remaining.substring(randomIndex + 1);
 		}
 		return result;
