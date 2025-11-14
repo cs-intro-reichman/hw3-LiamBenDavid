@@ -29,7 +29,7 @@ public class LoanCalc {
 	// interest rate (as a percentage), the number of periods (n), and the periodical payment.
 	private static double endBalance(double loan, double rate, int n, double payment) {	
         double balance = loan;
-        double monthlyRate = rate / 100.0; // Convert percentage to decimal
+        double monthlyRate = rate / 100.0;
         
         for (int i = 0; i < n; i++) {
             balance = balance * (1 + monthlyRate) - payment;
@@ -59,7 +59,6 @@ public class LoanCalc {
             if (balance > 0) {
                 payment += increment;
             } else {
-                // We overshot, step back and use smaller increments
                 payment -= increment;
                 increment /= 10.0;
                 if (increment < epsilon) {
