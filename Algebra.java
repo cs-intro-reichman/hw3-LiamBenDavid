@@ -25,14 +25,21 @@ public class Algebra {
 
 	// Returns x1 + x2
 	public static int plus(int x1, int x2) {
-		// Replace the following statement with your code
         int iterations = 0;
-        int value =  x1;
-        while (iterations < x2){
-            value ++;
-            iterations ++;
+        int value = x1;
+        
+        if (x2 >= 0) {
+            while (iterations < x2) {
+                value++;
+                iterations++;
+            }
+        } else {
+            while (iterations < Math.abs(x2)) {
+                value--;
+                iterations++;
+            }
         }
-
+        
 		return value;
 	}
 
